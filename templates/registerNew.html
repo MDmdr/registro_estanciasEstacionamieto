@@ -1,0 +1,36 @@
+<!-- registerNew -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>REGISTRAR ESTANCIA</title>
+</head>
+<body>
+	
+
+	entrada o salida
+	placa
+	oficial residente no_residente
+
+	(registrar)
+
+	<!-- <h3>Realizar pago de Estancia</h3> -->
+	<h3>Registrar Estacia de Vehiculo</h3>
+	<a href="/">Cancelar</a> <br>
+	<h4> {{ data['date'] }} </h4>
+	<p>  {{ data['hour'] }}   </p>
+	<hr>
+	<form action="/saveRegister" method="POST" enctype="multipart/form-data">
+	 <!-- <input type="text" name="nuevo_nombre" placeholder="Nuevo nombre"> -->
+	 <!-- <input id="nombreArchivo" name="nombre_archivo" type="hidden" value="{{nombre_archivo}}"> -->
+
+	 <input type="text" name="numeroPlaca" placeholder="Numero de placa"> <br>
+	 <input type="text" name="hora_E_S" placeholder="Hora | Entrada / Salida"> <br>
+	 <input type="text" name="tipoVehiculo" placeholder="Tipo de Vehiculo"> <br>
+	 <!-- <input type="text" name="nuevo_nombre" placeholder="Vehiculo">	 <br>
+	 <input type="text" name="nuevo_nombre" placeholder="Importe"> <br> -->
+
+	 <input type="submit" value="Registrar Estancia" >
+	</form>
+	
+</body>
+</html>

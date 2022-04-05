@@ -1,0 +1,25 @@
+<!-- registerVehicle -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ESTACIONAMINETO REGISTRO DE VEHICULO</title>
+</head>
+<body>
+	<h3>Realizar Registro de Vehiculo</h3> 
+	<a href="/">Cancelar</a> <br>
+	<!-- <h4>{{nombre_archivo}}</h4> -->
+	<hr>
+	<form action="/saveVehicle" method="POST" enctype="multipart/form-data">
+	 <!-- <input type="text" name="nuevo_nombre" placeholder="Nuevo nombre"> -->
+	 <!-- <input id="nombreArchivo" name="nombre_archivo" type="hidden" value="{{nombre_archivo}}"> -->
+
+	 <input type="text" name="numeroPlaca" placeholder="Numero de placa"> <br>
+	 <input type="text" name="marca" placeholder="Marca"> <br>
+	 <input type="text" name="propietario" placeholder="Nombre del propietario"> <br>
+	 <input type="text" name="tipoVehiculo" placeholder="Tipo de vehiculo">	 <br>
+	 
+	 <input type="submit" value="Registrar vehiculo" >
+	</form>
+	
+</body>
+</html>

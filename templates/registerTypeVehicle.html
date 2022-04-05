@@ -1,0 +1,24 @@
+<!-- registerTypeVehicle -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ESTACIONAMINETO TIPO VEHICULOS</title>
+</head>
+<body>
+	<h3>Realizar Registro de Tipo de Vehiculo</h3> 
+	<a href="/">Cancelar</a> <br>
+	<!-- <h4>{{nombre_archivo}}</h4> -->
+	<hr>
+	<form action="/saveTypeVehicle" method="POST" enctype="multipart/form-data">
+	 <!-- <input type="text" name="nuevo_nombre" placeholder="Nuevo nombre"> -->
+	 <!-- <input id="nombreArchivo" name="nombre_archivo" type="hidden" value="{{nombre_archivo}}"> -->
+
+	 <input type="text" name="tipoVehiculo" placeholder="Tipo de Vehiculo"> <br>
+	 <input type="text" name="descripcion" placeholder="Descripcion del tipo"> <br>
+	 
+
+	 <input type="submit" value="Resgistrar Tipo" >
+	</form>
+	
+</body>
+</html>
