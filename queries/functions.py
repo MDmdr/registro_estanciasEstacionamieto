@@ -114,4 +114,49 @@ def saveRegisterParking( car_plate, hour_entry, hour_exit, proprietor, amount_ac
     print(" Registro de Estancia almacenado en la tabla de la base de datos")
     return ""
 
+# get registers tables ----------------------------------------------------------
+
+def getRegisterTypeVehicle( TypeVehicle, description ):
+    # typeVehicles TABLE
+    # id VARCHAR(80), 
+    # type_vehicle VARCHAR(150),
+    # description VARCHAR(350)
+    conn = conection()
+    # SELECT * FROM bd1.typeVehicles;
+    sql_text = text(" SELECT * FROM bd1.typeVehicles ")
+    result = conn.execute(sql_text)
+
+    conn.close()
+    print("Todos los Tipos de vehiculos obtenidos")
+    return ""
+
+
+def getRegisterVehicle( mark, car_plate, proprietor, type_vehicle ):
+    # vehicles TABLE
+    # id VARCHAR(80), 
+    # mark VARCHAR(150),
+    # car_plate VARCHAR(100),
+    # proprietor VARCHAR(150),
+    # type_vehicle VARCHAR(100)
+    conn = conection()
+
+    sql_text = text("SELECT * FROM  bd1.vehicles ")
+    result = conn.execute(sql_text)
+
+    conn.close()
+    print(" Todos los vehiculos obtenidos de la base de datos")
+    return ""
+
+# buscar matricula
+def searchCarPlate(car_plate):
+    result="No hay matricula"
+    conn = conection()
+
+    sql_text = text("SELECT * FROM bd1.vehicles WHERE car_plate='"+car_plate+"' ")
+    result = conn.execute(sql_text)
+
+    conn.close()
+    print(" Matricula buscada: "+ str(result) )
+    return ""
+
 
