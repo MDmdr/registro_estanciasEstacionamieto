@@ -24,7 +24,8 @@
 	 <!-- <input id="nombreArchivo" name="nombre_archivo" type="hidden" value="{{nombre_archivo}}"> -->
 
 	 <input type="text" name="numeroPlaca" placeholder="Numero de placa"> <br>
-	 <input type="text" name="hora_E_S" placeholder="Hora | Entrada / Salida"> <br>
+	 <!-- <input type="text" name="hora_E_S" placeholder="Hora | Entrada / Salida"> <br> -->
+	 <input type="text" name="hora_E_S" placeholder="{{ data['hour'] }}"  readonly> <br>
 	 <input type="text" name="tipoVehiculo" placeholder="Tipo de Vehiculo"> <br>
 	 <!-- <input type="text" name="nuevo_nombre" placeholder="Vehiculo">	 <br>
 	 <input type="text" name="nuevo_nombre" placeholder="Importe"> <br> -->

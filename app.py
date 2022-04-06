@@ -13,7 +13,9 @@ import string
 #-------------------------------------------
 import codecs
 
-# 
+# queries
+from queries import functions
+
 app = Flask(__name__)
 
 
@@ -24,6 +26,10 @@ app = Flask(__name__)
 def main():
     print( getDate() )
     print( getHour() )
+    
+    # setTypeVehicle    
+    functions.getTypesVehicles()
+    functions.setTypeVehicle()
     return render_template('index.html')
 
 # registerNew
@@ -86,25 +92,28 @@ def save_Vehicle():
     # Propietario 
     # tipoVehiculo
     if request.method == 'POST':
-        texto=request.form.get("numeroPlaca")
-        texto="/"+texto+"/"+request.form.get("marca")
-        texto="/"+texto+"/"+request.form.get("propietario")
-        texto="/"+texto+"/"+request.form.get("tipoVehiculo")
+        car_plate=request.form.get("numeroPlaca")
+        mark=request.form.get("marca")
+        proprietor=request.form.get("propietario")
+        type_vehicle=request.form.get("tipoVehiculo")
 
-    # save registers to dataBase
+        # save registers to dataBase
+        functions.saveRegisterVehicle( mark, car_plate, proprietor, type_vehicle )
 
-    texto="/"+texto+"/"+"[registrar vehiculo]"
+    texto="[registrar vehiculo]"
     return texto
 
 @app.route("/saveTypeVehicle", methods=['POST'])
 def save_TypeVehicle():
     if request.method == 'POST':    
-        texto=request.form.get("tipoVehiculo")
-        texto="/"+texto+"/"+request.form.get("descripcion")
+        TypeVehicle=request.form.get("tipoVehiculo")
+        description=request.form.get("descripcion")
 
-    # save registers to dataBase
+        # save registers to dataBase
+        functions.saveRegisterTypeVehicle( TypeVehicle, description )
+        # saveRegisterTypeVehicle( TypeVehicle, description ):
 
-    texto="/"+texto+"/"+"[registrar algun tipo vehiculo]" 
+    texto="[ Tipo de vehiculo -> Regisrado ]" 
     return texto
 
 @app.route("/savePay", methods=['POST'])
