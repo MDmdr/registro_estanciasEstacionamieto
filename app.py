@@ -38,12 +38,19 @@ def main():
 # registerTypeVehicle
 # registerPay
 
+# @app.route('/registerNew')
+# def register_New():   
+#     data={ 'date': getDate() ,
+#            'hour': getHour() 
+#           }
+#     return render_template('registerNew.html', data=data)
+
 @app.route('/registerNew')
 def register_New():   
     data={ 'date': getDate() ,
            'hour': getHour() 
           }
-    return render_template('registerNew.html', data=data)
+    return render_template('optionRegisterParking.html', data=data)
 
 @app.route('/registerLists')
 def register_Lists():
@@ -67,23 +74,28 @@ def register_TypeVehicle():
 @app.route('/registerPay')
 def register_Pay():
     return render_template('registerPay.html')
-
-
 # ---------------------------------------------------------------------------------
-@app.route("/saveRegister", methods=['POST'])
-def save_Register():
-  if request.method == 'POST':
-    # texto=request.form.get("texto1")
-    texto=request.form.get("numeroPlaca")
-    texto="/"+texto+"/"+ request.form.get("hora_E_S")
-    texto="/"+texto+"/"+request.form.get("tipoVehiculo") 
+@app.route('/registerEntry')
+def register_Entry():
+    return render_template('registerPay.html')
 
-  texto="/"+texto+"/"+"[registro guardado]"
+@app.route('/registerExit')
+def register_Exit():
+    
+    return render_template('registerPay.html')
+# ---------------------------------------------------------------------------------
+# @app.route("/saveRegister", methods=['POST'])
+# def save_Register():
+#   if request.method == 'POST':
+#     # texto=request.form.get("texto1")
+#     texto=request.form.get("numeroPlaca")
+#     texto=request.form.get("hora_E_S")
+#     texto=request.form.get("tipoVehiculo") 
 
-
-  # save registers to dataBase  
-  # PROCESO FROM -->RESPOSE
-  return texto
+#   texto="[registro guardado]"
+#   # save registers to dataBase  
+#   # PROCESO FROM -->RESPOSE
+#   return texto
 
 @app.route("/saveVehicle", methods=['POST'])
 def save_Vehicle():
@@ -100,8 +112,12 @@ def save_Vehicle():
         # save registers to dataBase
         functions.saveRegisterVehicle( mark, car_plate, proprietor, type_vehicle )
 
-    texto="[registrar vehiculo]"
-    return texto
+    # texto="[registrar vehiculo]"
+    # return texto
+    data={ 'msg': "Vehiculo guardado en la base de datos",
+           'link': "null"
+        }
+    return render_template('exitApp.html', data=data)
 
 @app.route("/saveTypeVehicle", methods=['POST'])
 def save_TypeVehicle():
@@ -113,8 +129,12 @@ def save_TypeVehicle():
         functions.saveRegisterTypeVehicle( TypeVehicle, description )
         # saveRegisterTypeVehicle( TypeVehicle, description ):
 
-    texto="[ Tipo de vehiculo -> Regisrado ]" 
-    return texto
+    # texto="[ Tipo de vehiculo -> Regisrado ]" 
+    # return texto
+    data={ 'msg': "Tipo de vehiculo guardado",
+           'link': "null"
+        }
+    return render_template('exitApp.html', data=data)
 
 @app.route("/savePay", methods=['POST'])
 def save_Pay():
@@ -125,10 +145,10 @@ def save_Pay():
     # importe
     if request.method == 'POST':
         texto=request.form.get("numeroPlaca")
-        texto="/"+texto+"/"+request.form.get("hora")
-        texto="/"+texto+"/"+request.form.get("tipoVehiculo")
-        texto="/"+texto+"/"+request.form.get("vehiculo")
-        texto="/"+texto+"/"+request.form.get("importe")
+        texto=request.form.get("hora")
+        texto=request.form.get("tipoVehiculo")
+        texto=request.form.get("vehiculo")
+        texto=request.form.get("importe")
     
     # get all pay
 
@@ -136,6 +156,123 @@ def save_Pay():
 
     texto="/"+texto+"/"+"[registrar pago de estancia]" 
     return texto
+
+# --------------------------------------------------------------------------------
+@app.route("/viewInputCarPlate")
+def view_InputCarPlate():
+    # url to view input car plate    
+    return render_template('inputCarPlate.html')
+
+
+# @app.route("/searchCarPlate", methods=['POST'])
+# def search_CarPlate():
+#     if request.method == 'POST':    
+#         car_plate=request.form.get("car_plate")
+        
+#         # search car plate
+#         functions.searchCarPlate( car_plate )
+#         # saveRegisterTypeVehicle( TypeVehicle, description ):
+
+#     # texto="[ Tipo de vehiculo -> Regisrado ]" 
+#     # return texto
+#     data={ 'msg': "Tipo de vehiculo guardado",
+#            'link': "null"
+#         }
+#     return render_template('exitApp.html', data=data)
+
+@app.route("/captureCarPlate", methods=['POST'])
+def capture_CarPlate():
+    if request.method == 'POST':    
+        car_plate=request.form.get("car_plate")
+        
+        # search car plate
+        # functions.function( car_plate ) # some operation
+
+        data={ 'msg': " ",
+             'link': "null",
+             'car_plate': car_plate
+        }
+        return render_template('optionRegisterParking.html', data=data)
+        
+    
+    data={ 'msg': " ",
+           'link': "null"
+        }
+    return render_template('exitApp.html', data=data)
+
+@app.route("/saveEntryCar", methods=['POST'])
+def save_EntryCar():
+    if request.method == 'POST':    
+        car_plate=request.form.get("car_plate")        
+        # some operation
+        data={ 'msg': " ",
+             'link': "null",
+             'car_plate': car_plate,
+             'option_ES': "entry",
+             'date': getDate(),
+             'hour': getHour()
+        }
+        return render_template('viewRegisterNew.html', data=data)
+        
+    
+    data={ 'msg': " ",
+           'link': "null"
+        }
+    return render_template('exitApp.html', data=data)
+
+@app.route("/saveExitCar", methods=['POST'])
+def save_ExitCar():
+    if request.method == 'POST':    
+        car_plate=request.form.get("car_plate")        
+        # some operation
+        data={ 'msg': " ",
+             'link': "null",
+             'car_plate': car_plate,
+             'option_ES': "exit",
+             'date': getDate(),
+             'hour': getHour()
+        }
+        return render_template('viewRegisterNew.html', data=data)
+        
+    
+    data={ 'msg': " ",
+           'link': "null"
+        }
+    return render_template('exitApp.html', data=data)
+
+@app.route("/saveRegisterParking", methods=['POST'])
+def save_RegisterParking():
+    if request.method == 'POST':
+        option_ES=request.form.get("option_ES")
+        car_plate=request.form.get("car_plate")
+        date=request.form.get("date")
+        hour=request.form.get("hour")
+        type_vehicle=request.form.get("type_vehicle")
+
+        if option_ES == "entry":
+            # Entry car
+            functions.saveEntryCarParking
+            data={ 'msg': "Registro de entrada Guardado",
+               'link': "null"
+            }
+            return render_template('exitApp.html', data=data)
+        if option_ES == "exit":
+            # Exit car
+            functions.saveExitCarParking
+            data={ 'msg': "Registro de salida Guardado",
+               'link': "null"
+            }
+            return render_template('exitApp.html', data=data)
+
+        data={ 'msg': "No option",
+               'link': "null"
+            }
+        return render_template('exitApp.html', data=data)
+
+    data={ 'msg': " ",
+           'link': "null"
+        }
+    return render_template('exitApp.html', data=data)
 
 
 

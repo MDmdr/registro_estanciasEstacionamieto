@@ -1,0 +1,35 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ESTACIONAMIENTO</title>
+</head>
+<body>	
+
+	<h3></h3>	
+
+	<hr>
+	<h3>Opcion de Registrar Estancia de vehiculo</h3>
+	<hr>
+    <h4>Matricula de Vehiculo: </h4> {{ data['car_plate'] }} 
+	<hr>
+	<br>
+	<!-- <hr> -->
+	<form action="/saveEntryCar" method="POST" enctype="multipart/form-data">	
+     <input id="car_plate" name="car_plate" type="hidden" value="{{ data['car_plate'] }}">
+	 <input type="submit" value=" Entrada " >
+	</form>
+
+	<form action="/saveExitCar" method="POST" enctype="multipart/form-data">	
+     <input id="car_plate" name="car_plate" type="hidden" value="{{ data['car_plate'] }}">
+	 <input type="submit" value=" Salida " >
+	</form>
+
+
+	<hr>
+	
+	<a href="/">Salir / Cancelar</a> <br>
+		
+
+	
+</body>
+</html>
