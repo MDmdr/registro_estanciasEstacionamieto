@@ -1,0 +1,6 @@
+# Create and config data base
+
+# install requirements.txt
+
+# run app
+python app.py
