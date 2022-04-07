@@ -24,11 +24,11 @@
 	 
 	 <input id="option_es" name="option_ES" type="hidden" value="{{ data['option_ES'] }}">
 
-	 <input type="text" name="car_plate" placeholder=" {{data['car_plate']}} " readonly> <br>
-	 <input type="text" name="date" placeholder=" {{data['date']}}" readonly> <br>
-	 <input type="text" name="hour" placeholder="{{ data['hour'] }}" readonly> <br>
+	 <input type="text" name="car_plate" value="{{ data['car_plate'] }}" placeholder=" {{data['car_plate']}} " readonly> <br>
+	 <input type="text" name="date" value="{{ data['date'] }}"placeholder=" {{data['date']}}" readonly> <br>
+	 <input type="text" name="hour" value="{{ data['hour'] }}" placeholder="{{ data['hour'] }}" readonly> <br>
 
-	 <input type="text" name="type_vehicle" placeholder="Tipo de Vehiculo"> <br>
+	 <input type="text" name="type_vehicle" placeholder="Tipo de Vehiculo" required="required"> <br>
 	 <!-- <input type="text" name="nuevo_nombre" placeholder="Vehiculo">	 <br>
 	 <input type="text" name="nuevo_nombre" placeholder="Importe"> <br> -->
 

@@ -250,15 +250,23 @@ def save_RegisterParking():
         type_vehicle=request.form.get("type_vehicle")
 
         if option_ES == "entry":
-            # Entry car
-            functions.saveEntryCarParking
+            # Entry car            
+            functions.saveEntryCarParking( car_plate, date, hour, type_vehicle)
             data={ 'msg': "Registro de entrada Guardado",
-               'link': "null"
-            }
+                   'link': "null"
+                }
             return render_template('exitApp.html', data=data)
+
+            # # functions.saveEntryCarParking( car_plate, date, hour, type_vehicle)
+            # data={ 'msg': "false",
+            #    'link': "null"
+            # }
+            # return render_template('exitApp.html', data=data)
         if option_ES == "exit":
             # Exit car
-            functions.saveExitCarParking
+            #functions.saveExitCarParking( car_plate, date, hour, type_vehicle)
+            save_parking_car_exit( car_plate, date, hour, type_vehicle)
+            
             data={ 'msg': "Registro de salida Guardado",
                'link': "null"
             }
@@ -276,7 +284,21 @@ def save_RegisterParking():
 
 
 
-##----------------------------------------------------------------------------------
+## ----------------------------------------------------------------------------------
+def save_parking_car_exit( car_plate, date, hour, type_vehicle):
+    if type_vehicle == "oficial":        
+        functions.saveRegister_Oficial(car_plate, date, hour)
+        return ""
+    if type_vehicle == "residente":        
+        functions.saveRegister_Residente(car_plate, date, hour)
+        return ""
+    if type_vehicle == "no_residente":
+        functions.saveRegister_No_residente(car_plate, date, hour)
+        return ""
+    else:
+        return "false"
+    return "false"
+## ---------------------------------------------------------------------------------
 from datetime import datetime
 import uuid
 def getDate():  

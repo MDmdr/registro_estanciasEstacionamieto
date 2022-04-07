@@ -159,4 +159,114 @@ def searchCarPlate(car_plate):
     print(" Matricula buscada: "+ str(result) )
     return ""
 
+# ------------------------------------------------------------------------------------
+# create data in BD
+def saveEntryCarParking( car_plate, date_entry, hour_entry, type_vehicle):
+    # conn = conection()
+    # sql_text = text("INSERT INTO  bd1.vehicles (id, car_plate, amount, status ) VALUES ( ' "+getUid()+" ' , ' "+car_plate+" '  , ' "+amount+" ' , ' "+status+" ' ) ")
+    # result = conn.execute(sql_text)
+    # conn.close()
+    id=getUid()
+    conn = conection()
+
+    sql_text = text("INSERT INTO  bd1.register_parking (id, car_plate, date_entry, hour_entry ) VALUES ( ' "+getUid()+" ' , ' "+car_plate+" '  , ' "+date_entry+" ' , ' "+hour_entry+" '   ) ")
+    result = conn.execute(sql_text)
+
+    conn.close()
+    return ""
+
+# updates data in the bd, of register in BD
+# def saveExitCarParking( car_plate, date, hour, type_vehicle):
+
+#     # se busca id ? y car_plate
+#     # id, car_plate
+#     # (UPDATE bd1.t_test SET id=8, text='texto update a 8' WHERE id=9)
+
+#     "UPDATE bd1.register_parking date_exit=date,hour_exit=hour WHERE id=id AND car_plate=car_plate"
+    
+#     text("UPDATE bd1.register_parking date_exit=date,hour_exit=hour WHERE id=id AND car_plate=car_plate")
+    
+
+
+#     conn = conection()
+
+#     text=text(UPDATE bd1.register_parking SET phone_no='Phone No',cust_city='Kolkata',grade=1 WHERE id='id' AND car_plate='car_plate')
+
+#     sql_text = text("INSERT INTO  bd1.register_parking (date_exit, hour_exit, proprietor, amount_acc ) VALUES ( ' "+getUid()+" ' , ' "+car_plate+" '  , ' "+hour_entry+" ' , ' "+hour_exit+" ' , ' "+proprietor+" ' , ' "+amount_acc+" ' ) ")
+#     result = conn.execute(sql_text)
+
+#     conn.close()
+#     return ""
+
+# def saveExitCarParking( car_plate, date, hour, type_vehicle): # ???
+#     if type_vehicle == "oficial":        
+#         saveRegister_Oficia()
+#         return ""
+#     if type_vehicle == "residente":        
+#         saveRegister_Residente()
+#         return ""
+#     if type_vehicle == "no_residente":
+#         saveRegister_No_residente()
+#         return ""
+#     else:
+#         return "false"
+#     return "false"
+
+def saveRegister_Oficial(car_plate, date, hour):
+    # aux=searchCarPlate(car_plate)
+    aux1="NULL"
+    aux2="NULL"
+    conn = conection()
+
+    # sql_text = text("SELECT id FROM bd1.register_parking WHERE car_plate='"+car_plate+"' AND date_exit='"+aux1+"' AND hour_exit='"+aux2+"'  ")
+    sql_text = text("SELECT id FROM bd1.register_parking WHERE car_plate='"+car_plate+"' ")
+    result = conn.execute(sql_text)
+
+    conn.close()
+    print("result: ")
+    print(f"Numero de filas = {result.rowcount}.")
+    # Number of rows
+    for row in result:
+        print(row)
+    # -----------------------------------------------------
+    id=getUid()
+    amount_acc="0" #str()
+    conn = conection()
+
+    # "INSERT INTO  bd1.register_parking (id, car_plate, date_exit, hour_exit, amount_acc ) VALUES ( ' "+getUid()+" ' , ' "+car_plate+" '  , ' "+date+" ' , ' "+hour+" '  , ' "+amount_acc+" '  ) "
+
+    sql_text = text("INSERT INTO  bd1.register_parking (id, car_plate, date_exit, hour_exit, amount_acc ) VALUES ( ' "+getUid()+" ' , ' "+car_plate+" '  , ' "+date+" ' , ' "+hour+" '  , 0.0  ) ")
+    result = conn.execute(sql_text)
+
+    conn.close()
+    # -----------------------------------------------------
+    return ""
+
+def saveRegister_Residente(car_plate, date, hour):
+    # -----------------------------------------------------
+    id=getUid()
+    conn = conection()
+
+    sql_text = text("INSERT INTO  bd1.register_parking (id, car_plate, date_exit, hour_exit ) VALUES ( ' "+getUid()+" ' , ' "+car_plate+" '  , ' "+date+" ' , ' "+hour+" '   ) ")
+    result = conn.execute(sql_text)
+
+    conn.close()
+    # -----------------------------------------------------
+    return ""
+
+def saveRegister_No_residente(car_plate, date, hour):
+    # -----------------------------------------------------
+    id=getUid()
+    conn = conection()
+
+    sql_text = text("INSERT INTO  bd1.register_parking (id, car_plate, date_exit, hour_exit ) VALUES ( ' "+getUid()+" ' , ' "+car_plate+" '  , ' "+date+" ' , ' "+hour+" '   ) ")
+    result = conn.execute(sql_text)
+
+    conn.close()
+    # -----------------------------------------------------
+    return ""
+
+
+
+
 
