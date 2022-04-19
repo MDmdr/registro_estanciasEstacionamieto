@@ -127,9 +127,44 @@ def getRegisterTypeVehicle( TypeVehicle, description ):
     result = conn.execute(sql_text)
 
     conn.close()
-    print("Todos los Tipos de vehiculos obtenidos")
-    return ""
+    # print("Todos los Tipos de vehiculos obtenidos")
+    # return ""
+    array1=[]
+    i=0
 
+    # Number of rows
+    for row in result:
+        print(row)        
+        for col in row:
+            array1.append(col)
+            print(col)
+        array1.append("/")
+        i=i+1
+    # return result
+    return array1
+
+def getRegisterTypeVehicleAll():
+    
+    conn = conection()
+    
+    sql_text = text(" SELECT * FROM bd1.typeVehicles ")
+    result = conn.execute(sql_text)
+
+    conn.close()
+    
+    array1=[]
+    i=0
+
+    # Number of rows
+    for row in result:
+        print(row)        
+        for col in row:
+            array1.append(col)
+            print(col)
+        array1.append("/")
+        i=i+1
+    # return result
+    return array1
 
 def getRegisterVehicle( mark, car_plate, proprietor, type_vehicle ):
     # vehicles TABLE
@@ -241,6 +276,19 @@ def saveRegister_Oficial(car_plate, date, hour):
     conn.close()
     # -----------------------------------------------------
     return ""
+def exit_saveRegister_Oficial(car_plate, date, hour, identifier):     
+    # -----------------------------------------------------    
+    amount_acc="0"
+    conn = conection()
+
+    text1="update bd1.register_parking SET hour_exit='"+hour+"',date_exit='"+date+"',amount_acc='"+amount_acc+"' WHERE id LIKE '%"+identifier+"%'"
+
+    sql_text = text(text1)
+    result = conn.execute(sql_text)
+
+    conn.close()
+    # -----------------------------------------------------
+    return ""
 
 def saveRegister_Residente(car_plate, date, hour):
     # -----------------------------------------------------
@@ -250,6 +298,16 @@ def saveRegister_Residente(car_plate, date, hour):
     sql_text = text("INSERT INTO  bd1.register_parking (id, car_plate, date_exit, hour_exit ) VALUES ( ' "+getUid()+" ' , ' "+car_plate+" '  , ' "+date+" ' , ' "+hour+" '   ) ")
     result = conn.execute(sql_text)
 
+    conn.close()
+    # -----------------------------------------------------
+    return ""
+def exit_saveRegister_Residente(car_plate, date, hour, identifier):     
+    # -----------------------------------------------------    
+    amount_acc="0"
+    conn = conection()
+    text1="update bd1.register_parking SET hour_exit='"+hour+"',date_exit='"+date+"',amount_acc='"+amount_acc+"' WHERE id LIKE '%"+identifier+"%'"
+    sql_text = text(text1)
+    result = conn.execute(sql_text)
     conn.close()
     # -----------------------------------------------------
     return ""
@@ -265,6 +323,73 @@ def saveRegister_No_residente(car_plate, date, hour):
     conn.close()
     # -----------------------------------------------------
     return ""
+def exit_saveRegister_No_residente(car_plate, date, hour, identifier):     
+    # -----------------------------------------------------    
+    amount_acc="0"
+    conn = conection()
+    text1="update bd1.register_parking SET hour_exit='"+hour+"',date_exit='"+date+"',amount_acc='"+amount_acc+"' WHERE id LIKE '%"+identifier+"%'"
+    sql_text = text(text1)
+    result = conn.execute(sql_text)
+    conn.close()
+    # -----------------------------------------------------
+    return ""
+
+# -------------------------------------------------------------------------------
+def getAllRegisters():
+    conn = conection()
+    
+    sql_text = text(" SELECT * FROM register_parking ")
+    result = conn.execute(sql_text)
+
+    conn.close()
+
+    # ??array1[][]=""
+    # dim_row = 2
+    # dim_columns = 2
+    # output = [[0 for x in range(dim_columns)] for i in range(dim_row)]
+
+    array1=[]
+    i=0
+
+    # Number of rows
+    for row in result:
+        print(row)
+        # array1[i].append()
+        # array1.append("/")
+        for col in row:
+            array1.append(col)
+            print(col)
+        array1.append("/")
+        i=i+1
+    # return result
+    return array1
+
+def checkCarPlateRegister(car_plate):
+    conn = conection()
+
+    # "select id,car_plate from register_parking where car_plate LIKE '%"+car_plate+"%' AND hour_exit IS NULL AND date_exit IS NULL LIMIT 1"
+
+    sql_text = text("select id from register_parking where car_plate LIKE '%"+car_plate+"%' AND hour_exit IS NULL AND date_exit IS NULL LIMIT 1")
+    result = conn.execute(sql_text)
+
+    conn.close()
+    print("functions result->")
+    print(result)
+    print("functions result row->")
+    aux=""
+    for row in result:
+        print(row)
+        aux=row
+        for col in row:
+            aux=col
+    if aux=="":
+        print("vacio")
+    else:
+        print("aux->")
+        print(aux)
+
+
+    return aux
 
 
 

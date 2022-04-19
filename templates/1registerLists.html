@@ -1,0 +1,126 @@
+<!-- registerLists -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>ESTACIONAMIENTO REGISTROS</title>
+</head>
+<body>
+	<h3>Lista de registros</h3>
+	<h4>{{nombre_archivo}}</h4>
+	
+	<!-- <p>Tabla html</p> -->
+	<!-- placa |tipo_vehiculo | propietario | fecha | hora_entrada | hora_salida | Importe -->
+
+	<!-- <h6>Vehiculos</h6> -->
+	<ul>
+		<li>Vehiculo</li>
+		<li>Estancias</li>
+		<li>pagos</li>
+	</ul>
+
+	<table border class="default">
+	  <tr>
+	    <th>Placa</th>
+	    <th>Tipo de vehiculo</th>
+	    <th>Propietario</th>
+	    <th>Fecha</th>
+	    <th>Hora entrada</th>
+	    <th>Hora salida</th>
+	    <th>Importe</th>
+	    <th>Pagodo</th>
+
+	  </tr>
+	  <tr>
+	    <td>83fg46f</td>
+	    <td>Residente</td>
+	    <td>Particular</td>
+	    <td>04/04/2022</td>
+	    <td>8:00</td>
+	    <td>13:00</td>
+	    <td>50</td>
+	    <td>NO</td>
+	    	    
+	  </tr>
+	  <tr>
+	    <td>7t4h89</td>
+	    <td>Oficial</td>
+	    <td>Cruz roja</td>
+	    <td>04/04/2022</td>
+	    <td>9:50</td>
+	    <td>11:45</td>
+	    <td>0</td>
+	    <td>NO requerido</td>   
+	  </tr>
+	  <tr>
+	    <td>y567he1</td>
+	    <td>No residente</td>
+	    <td>Particular</td>
+	    <td>04/04/2022</td>
+	    <td>10:00</td>
+	    <td>11:35</td>
+	    <td>68</td>
+	    <td>Pagodo</td>    
+	  </tr>
+
+	</table>
+	
+
+
+	<hr>
+	<a href="/">Salir / Volver </a> <br>
+
+	<!-- ----------------------------------- -->
+	<br>
+	{{data['date']}}
+	{{data['registers']}}
+	<hr>
+	<!-- {{data.registers[0]}} -->
+	<hr>
+	{% for row in data['registers'] -%}    
+    
+        <li>  {{ row }}    </li>
+    
+  	{% endfor -%}
+  
+  <br>
+  <ul>
+        
+        
+    </ul>
+
+    <hr>
+
+    <h5> title table</h5>  
+
+    <table border class="default">
+    	<tr>
+        {% for item in data['registers'] -%}
+
+        		
+		
+			{% if '/' == item %}
+
+			</tr>
+
+			<tr>
+		    	
+		    {% else %}
+
+		    <td> {{ item }} </td>
+					    	    
+		    {% endif %}
+		
+		{% endfor -%}
+
+		</tr>
+    </table>
+	<hr>
+
+	
+    
+
+
+	<!-- ----------------------------------- -->
+		
+</body>
+</html>

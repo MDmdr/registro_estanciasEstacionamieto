@@ -17,7 +17,13 @@
 	
 	<!-- <h4> {{ data['date'] }} </h4>
 	<p>  {{ data['hour'] }}   </p> -->
-	<h4> > {{ data['option_ES'] }} < </h4>
+	<!-- <h4> > {{ data['option_ES'] }} < </h4> -->
+	{% if data['option_ES'] == 'entry' %}
+		<h3>Entrada</h3>	
+	{% endif %}
+	{% if data['option_ES'] == 'exit' %}
+		<h3>Salida</h3>	
+	{% endif %}
 	<a href="/">Cancelar</a> <br>
 	<hr>
 	<form action="/saveRegisterParking" method="POST" enctype="multipart/form-data">
@@ -28,12 +34,28 @@
 	 <input type="text" name="date" value="{{ data['date'] }}"placeholder=" {{data['date']}}" readonly> <br>
 	 <input type="text" name="hour" value="{{ data['hour'] }}" placeholder="{{ data['hour'] }}" readonly> <br>
 
-	 <input type="text" name="type_vehicle" placeholder="Tipo de Vehiculo" required="required"> <br>
+	 <input id="identifier" name="identifier" type="hidden" value="{{ data['identifier'] }}">
+
+	 <!-- <input type="text" name="type_vehicle" placeholder="Tipo de Vehiculo" required="required"> <br> -->
+
+	 <!-- <label for="cars">Choose a Type Vehicle:</label> -->
+	 <label for="cars">Elige el tipo de vehiculo:</label>
+	 <br>
+		<select id="type_vehicle" name="type_vehicle">
+		  <option value="oficial">Oficial</option>
+		  <option value="residente">Residente</option>
+		  <option value="no_residente">No residente</option>		  
+		</select>
+	 <br>
 	 <!-- <input type="text" name="nuevo_nombre" placeholder="Vehiculo">	 <br>
 	 <input type="text" name="nuevo_nombre" placeholder="Importe"> <br> -->
 
 	 <input type="submit" value="Registrar Estancia" >
 	</form>
+	<!-- <hr> -->
+	<!-- {{ data['identifier'] }} -->
+	<!-- {{ data['typeVehicles'] }} -->
+
 	
 </body>
 </html>

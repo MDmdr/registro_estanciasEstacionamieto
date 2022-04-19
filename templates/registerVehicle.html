@@ -13,10 +13,20 @@
 	 <!-- <input type="text" name="nuevo_nombre" placeholder="Nuevo nombre"> -->
 	 <!-- <input id="nombreArchivo" name="nombre_archivo" type="hidden" value="{{nombre_archivo}}"> -->
 
-	 <input type="text" name="numeroPlaca" placeholder="Numero de placa"> <br>
-	 <input type="text" name="marca" placeholder="Marca"> <br>
-	 <input type="text" name="propietario" placeholder="Nombre del propietario"> <br>
-	 <input type="text" name="tipoVehiculo" placeholder="Tipo de vehiculo">	 <br>
+	 <input type="text" name="numeroPlaca" placeholder="Numero de placa" required="required"> <br>
+	 <input type="text" name="marca" placeholder="Marca"                 required="required"> <br>
+	 <input type="text" name="propietario" placeholder="Nombre del propietario" required="required"> <br>
+
+	 <!-- <input type="text" name="tipoVehiculo" placeholder="Tipo de vehiculo">	 <br> -->
+	 <!-- <label for="cars">Choose a Type Vehicle:</label> -->
+	 <label for="cars">Elige el tipo de vehiculo:</label>
+	 <br>
+		<select id="type_vehicle" name="type_vehicle">
+		  <option value="oficial">Oficial</option>
+		  <option value="residente">Residente</option>
+		  <option value="no_residente">No residente</option>		  
+		</select>
+	 <br>
 	 
 	 <input type="submit" value="Registrar vehiculo" >
 	</form>

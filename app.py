@@ -6,6 +6,9 @@ from flask import Flask, render_template, json, request
 from werkzeug.utils import secure_filename
 from flask import send_file 
 
+from jinja2 import Template
+import numpy as np
+
 #-------------------------------------------
 import json
 #-------------------------------------------
@@ -55,9 +58,16 @@ def register_New():
 @app.route('/registerLists')
 def register_Lists():
     # get query all registrer function assignment
+    registers=functions.getAllRegisters()
+    print("Imprimir registros type-> ")
+    print( type(registers) )
+
+    # registers=[6,7,9,2,4,3,1,9]
     data={ 'date': getDate() ,
            'hour': getHour(),
-           'arrayRegistros': "null"
+           # 'registers': json.dumps( registers.__dict__ )
+           # 'registers': np.array( list( registers.items() ) )
+           'registers': registers
         }
     return render_template('registerLists.html', data=data)
 
@@ -203,14 +213,16 @@ def capture_CarPlate():
 @app.route("/saveEntryCar", methods=['POST'])
 def save_EntryCar():
     if request.method == 'POST':    
-        car_plate=request.form.get("car_plate")        
+        car_plate=request.form.get("car_plate")
+           
         # some operation
         data={ 'msg': " ",
              'link': "null",
              'car_plate': car_plate,
              'option_ES': "entry",
              'date': getDate(),
-             'hour': getHour()
+             'hour': getHour(),
+             'typeVehicles': functions.getRegisterTypeVehicleAll()
         }
         return render_template('viewRegisterNew.html', data=data)
         
@@ -223,14 +235,31 @@ def save_EntryCar():
 @app.route("/saveExitCar", methods=['POST'])
 def save_ExitCar():
     if request.method == 'POST':    
-        car_plate=request.form.get("car_plate")        
+        car_plate=request.form.get("car_plate")
+
+        #check sesion car plate of vehicle
+        aux=functions.checkCarPlateRegister(car_plate)
+        print("interupcion mdr")
+        print(aux)
+        # return "interupcion mdr"
+        if aux=="":
+            data={ 'msg': "El vehiculo no tiene registro de entreda.",
+                   'link': "null"
+                }
+            return render_template('exitApp.html', data=data)
+        #else:
+
+        print("Def back-> ")
+        print( functions.getRegisterTypeVehicleAll()  )     
         # some operation
         data={ 'msg': " ",
              'link': "null",
              'car_plate': car_plate,
              'option_ES': "exit",
              'date': getDate(),
-             'hour': getHour()
+             'hour': getHour(),
+             'identifier': aux,
+             'typeVehicles': functions.getRegisterTypeVehicleAll()
         }
         return render_template('viewRegisterNew.html', data=data)
         
@@ -248,6 +277,7 @@ def save_RegisterParking():
         date=request.form.get("date")
         hour=request.form.get("hour")
         type_vehicle=request.form.get("type_vehicle")
+        identifier=request.form.get("identifier")
 
         if option_ES == "entry":
             # Entry car            
@@ -265,7 +295,8 @@ def save_RegisterParking():
         if option_ES == "exit":
             # Exit car
             #functions.saveExitCarParking( car_plate, date, hour, type_vehicle)
-            save_parking_car_exit( car_plate, date, hour, type_vehicle)
+            # save_parking_car_exit( car_plate, date, hour, type_vehicle)
+            save_parking_car_exit( car_plate, date, hour, type_vehicle, identifier)
             
             data={ 'msg': "Registro de salida Guardado",
                'link': "null"
@@ -285,15 +316,18 @@ def save_RegisterParking():
 
 
 ## ----------------------------------------------------------------------------------
-def save_parking_car_exit( car_plate, date, hour, type_vehicle):
+def save_parking_car_exit( car_plate, date, hour, type_vehicle, identifier):
     if type_vehicle == "oficial":        
-        functions.saveRegister_Oficial(car_plate, date, hour)
+        # functions.saveRegister_Oficial(car_plate, date, hour)
+        functions.exit_saveRegister_Oficial(car_plate, date, hour, identifier)
         return ""
     if type_vehicle == "residente":        
-        functions.saveRegister_Residente(car_plate, date, hour)
+        # functions.saveRegister_Residente(car_plate, date, hour)
+        functions.exit_saveRegister_Residente(car_plate, date, hour, identifier)
         return ""
     if type_vehicle == "no_residente":
-        functions.saveRegister_No_residente(car_plate, date, hour)
+        # functions.saveRegister_No_residente(car_plate, date, hour)
+        functions.exit_saveRegister_No_residente(car_plate, date, hour, identifier)
         return ""
     else:
         return "false"
